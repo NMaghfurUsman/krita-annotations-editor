@@ -51,6 +51,10 @@ class annotations_editor(DockWidget):
     def deleteAnnotation(self):
         annotation_type_name : str = self.ui.annotationCB.currentText()
         self.document.removeAnnotation(annotation_type_name)
+
+        self.ui.annotationDescLE.clear()    
+        self.ui.annotationTE.clear()
+
         self.annotationsChanged.emit()
         self.ui.annotationCB.currentIndex = 0
 
@@ -58,11 +62,19 @@ class annotations_editor(DockWidget):
     def addAnnotation(self):
         new_annotation_type_name : str = self.ui.lineEdit.text()
         self.ui.lineEdit.clear()
-        self.document.setAnnotation(new_annotation_type_name,str(),bytes())
+        desc : str = self.ui.annotationDescLE.text()
+        anno : str = self.ui.annotationTE.toPlainText()
+        self.document.setAnnotation(new_annotation_type_name, desc, bytes(anno, 'utf-8'))
         self.annotationsChanged.emit()
 
         newest_index : int = len(self.document.annotationTypes())-1
         self.ui.annotationCB.setCurrentIndex(newest_index)
+
+    @pyqtSlot()
+    def clearForm(self):
+        self.ui.annotationDescLE.clear()    
+        self.ui.annotationTE.clear()
+        self.ui.lineEdit.clear()
 
     @pyqtSlot()
     def openAnnotationURL(self):
@@ -77,20 +89,22 @@ class annotations_editor(DockWidget):
         k = Krita.instance()
 
         self.ui.writeBtn.setIcon(k.icon('document-export'))
-        self.ui.readBtn.setIcon(k.icon('document-import'))
         self.ui.delBtn.setIcon(k.icon('list-remove'))
         self.ui.addBtn.setIcon(k.icon('list-add'))
+        self.ui.clearBtn.setIcon(k.icon('edit-clear'))
         self.ui.openBtn.setText("🌐")
         
         self.ui.writeBtn.clicked.connect(self.setAnnotation)
-        self.ui.readBtn.clicked.connect(self.readOutAnnotation)
         self.ui.delBtn.clicked.connect(self.deleteAnnotation)
         self.ui.addBtn.clicked.connect(self.addAnnotation)
+        self.ui.clearBtn.clicked.connect(self.clearForm)
         self.ui.openBtn.clicked.connect(self.openAnnotationURL)
         
         self.setWidget(self.ui)    
 
         self.annotationsChanged.connect(self.updateCB)
+
+        self.ui.annotationCB.currentIndexChanged.connect(self.readOutAnnotation)
 
     @pyqtSlot()
     def updateCB(self):
