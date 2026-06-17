@@ -113,6 +113,7 @@ class annotations_editor(DockWidget):
         self.ui.annotationCB.setModel(new_model)
 
     def canvasChanged(self, canvas):
+        self.clearForm()
         if self.view:
             self.updateCB()
 
