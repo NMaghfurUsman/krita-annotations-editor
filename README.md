@@ -4,6 +4,8 @@ Krita documents can store a list of data records called annotations. Annotations
 
 This repository is a Python plugin for Krita, which adds a docker widget that you can use to edit a Krita document's annotations as plain textual data.
 
+![Screenshot of the Annotations Editor dock widget](image.png)
+
 ## System Requirements
 
  - Krita 5.3 ✅
