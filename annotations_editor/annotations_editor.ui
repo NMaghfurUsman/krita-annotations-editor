@@ -192,6 +192,13 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="0">
+      <widget class="QToolButton" name="refreshBtn">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>

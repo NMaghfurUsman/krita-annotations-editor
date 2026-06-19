@@ -76,6 +76,11 @@ class annotations_editor(DockWidget):
         self.ui.annotationTE.clear()
         self.ui.lineEdit.clear()
 
+    @pyqtSlot()
+    def refreshAnnotations(self):
+        self.annotationsChanged.emit()
+        self.ui.annotationCB.currentIndex = 0
+
     def __init__(self):
         super().__init__()
 
@@ -87,6 +92,7 @@ class annotations_editor(DockWidget):
         self.ui.delBtn.setIcon(k.icon('list-remove'))
         self.ui.addBtn.setIcon(k.icon('list-add'))
         self.ui.clearBtn.setIcon(k.icon('edit-clear'))
+        self.ui.refreshBtn.setIcon(k.icon('view-refresh'))
         
         self.ui.writeBtn.clicked.connect(self.setAnnotation)
         self.ui.delBtn.clicked.connect(self.deleteAnnotation)
@@ -94,6 +100,7 @@ class annotations_editor(DockWidget):
         self.ui.clearBtn.clicked.connect(self.clearForm)
         self.annotationsChanged.connect(self.updateCB)
         self.ui.annotationCB.currentIndexChanged.connect(self.readOutAnnotation)
+        self.ui.refreshBtn.clicked.connect(self.refreshAnnotations)
         
         self.setWidget(self.ui)    
 
