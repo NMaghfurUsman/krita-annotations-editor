@@ -38,7 +38,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Annotation Type</string>
+      <string>Type</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <property name="spacing">
@@ -96,7 +96,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Annotation Description</string>
+      <string>Description</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="leftMargin">
@@ -125,7 +125,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Annotation</string>
+      <string>Value</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
