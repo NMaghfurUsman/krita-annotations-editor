@@ -76,10 +76,6 @@ class annotations_editor(DockWidget):
         self.ui.annotationTE.clear()
         self.ui.lineEdit.clear()
 
-    @pyqtSlot()
-    def openAnnotationURL(self):
-        QDesktopServices.openUrl(QUrl(self.ui.annotationTE.toPlainText()))
-
     def __init__(self):
         super().__init__()
 
@@ -87,24 +83,19 @@ class annotations_editor(DockWidget):
         self.ui = uic.loadUi( os.path.join(os.path.dirname(os.path.realpath(__file__)),"annotations_editor.ui"))
         
         k = Krita.instance()
-
         self.ui.writeBtn.setIcon(k.icon('document-export'))
         self.ui.delBtn.setIcon(k.icon('list-remove'))
         self.ui.addBtn.setIcon(k.icon('list-add'))
         self.ui.clearBtn.setIcon(k.icon('edit-clear'))
-        self.ui.openBtn.setText("🌐")
         
         self.ui.writeBtn.clicked.connect(self.setAnnotation)
         self.ui.delBtn.clicked.connect(self.deleteAnnotation)
         self.ui.addBtn.clicked.connect(self.addAnnotation)
         self.ui.clearBtn.clicked.connect(self.clearForm)
-        self.ui.openBtn.clicked.connect(self.openAnnotationURL)
+        self.annotationsChanged.connect(self.updateCB)
+        self.ui.annotationCB.currentIndexChanged.connect(self.readOutAnnotation)
         
         self.setWidget(self.ui)    
-
-        self.annotationsChanged.connect(self.updateCB)
-
-        self.ui.annotationCB.currentIndexChanged.connect(self.readOutAnnotation)
 
     @pyqtSlot()
     def updateCB(self):
