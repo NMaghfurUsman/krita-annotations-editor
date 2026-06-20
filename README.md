@@ -1,6 +1,6 @@
 # Krita Annotations Editor
 
-Krita documents can store a list of data records called annotations. Annotations have a description and are retrieved by their annotation type name. 
+Krita documents can store a list of data records called annotations. Annotations have a description and their value is retrieved by their type name. 
 
 This repository is a Python plugin for Krita, which adds a docker widget that you can use to edit a Krita document's annotations as plain textual data.
 
@@ -21,11 +21,11 @@ This repository is a Python plugin for Krita, which adds a docker widget that yo
 
 ## Usage
 
-Input your annotation, a description, and an annotation type name, then click the `+` icon to add your annotation to the document.
+Input your annotation's value, a description, and their type name, then click the `+` icon to add your annotation type to the document.
 
 You can add more annotations and use the drop-down menu to view a particular one by its type name.
 
-Edit a type's annotation or description then click the save icon to write your changes.
+Edit a annotation type's value or description then click the save icon to write your changes.
 
 ## Credit
 
